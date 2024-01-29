@@ -2,12 +2,11 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from "mongoose";
-import multer from 'multer';
 import path from 'path'
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
-import authRoutes from './Routes/authRoutes';
-import userRoutes from "./Routes/userRoutes";
+import authRoutes from './Routes/authRoutes.js'
+// import userRoutes from './Routes/userRoutes.js'
 
 
 const app = express();
@@ -23,7 +22,7 @@ app.get('/' , (req,res) => {
 })
 
 app.use('/auth' , authRoutes);
-app.use('/users' , userRoutes);
+// app.use('/users' , userRoutes);
 
 const PORT = process.env.PORT;
 const URL = process.env.MONGO_URL;
