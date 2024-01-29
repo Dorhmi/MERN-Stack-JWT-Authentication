@@ -6,8 +6,8 @@ import multer from 'multer';
 import path from 'path'
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
-// import authRoutes from './Routes/authRoutes';
-// import userRoutes from "./Routes/userRoutes";
+import authRoutes from './Routes/authRoutes';
+import userRoutes from "./Routes/userRoutes";
 
 
 const app = express();
@@ -22,8 +22,8 @@ app.get('/' , (req,res) => {
     res.status(234).send("Welcom")
 })
 
-// app.use('/auth' , authRoutes);
-// app.use('/users' , userRoutes);
+app.use('/auth' , authRoutes);
+app.use('/users' , userRoutes);
 
 const PORT = process.env.PORT;
 const URL = process.env.MONGO_URL;
