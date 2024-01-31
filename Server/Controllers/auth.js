@@ -1,10 +1,19 @@
-// import User from "../Models/User"
+import User from "../Models/User.js"
 
 export const register = async (req ,res) => {
     try {
-        
+        const newUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.listName,
+            email: req.body.email,
+            password: req.body.password,
+            picture: req.file.path,
+        })
+
+        const savedUser = await newUser.save();
+        res.status(200).json(savedUser);
     } catch (error) {
-        console.log(error);
+        res.status(500).send({message : error.message})
     }
 }
 export const login = async (req ,res) => {
