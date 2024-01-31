@@ -4,12 +4,11 @@ export const register = async (req ,res) => {
     try {
         const newUser = new User({
             firstName: req.body.firstName,
-            lastName: req.body.listName,
+            lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
-            picture: req.file.path,
+            picture: req.file.originalname
         })
-
         const savedUser = await newUser.save();
         res.status(200).json(savedUser);
     } catch (error) {

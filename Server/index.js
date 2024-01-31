@@ -13,9 +13,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 dotenv.config();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.use('/assets' , express.static(path.join(__dirname, "public/assets")));
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// app.use('/assets' , express.static(path.join(__dirname, "public/assets")));
 
 app.get('/' , (req,res) => {
     res.status(234).send("Welcom")
