@@ -32,7 +32,8 @@ const UserSchema = new mongoose.Schema(
         picturePath: {
             type: String,
             default: ""
-        } 
+        } ,
+        isAdmin : Boolean
     },
     {timestamps: true}
 );

@@ -10,7 +10,6 @@ const RegisterPage = () => {
     const [password , setPassword] = useState("")
     const [picture , setPicture] = useState("")
     const navigate = useNavigate();
-    console.log(picture);
 
     const handleSubmit = (e) => {
         e.preventDefault();
