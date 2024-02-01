@@ -7,7 +7,8 @@ export const register = async (req ,res) => {
             lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
-            picture: req.file.originalname
+            picture: req.file.originalname,
+            picturePath: req.file.path
         })
         const savedUser = await newUser.save();
         res.status(200).json(savedUser);
