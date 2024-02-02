@@ -64,5 +64,4 @@ export const refresh = async (req ,res) => {
             refreshToken: newRefreshToken,
         })
     })
-    res.status(200).json('refresh')
 }
