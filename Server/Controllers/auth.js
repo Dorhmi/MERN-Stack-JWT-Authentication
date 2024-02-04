@@ -37,11 +37,12 @@ export const login = async (req ,res) => {
                 res.status(200).json({
                     accessToken,
                     refreshToken,
-                    isSuccess : true
                 })
+        } else {
+            res.json('incorrect password')
         }
     } catch (error) {
-        res.status(500).send({message: error.message})
+        res.json('incorrect password')
     }
 }
 export const refresh = async (req ,res) => {

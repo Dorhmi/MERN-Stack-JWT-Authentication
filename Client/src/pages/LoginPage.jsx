@@ -7,6 +7,7 @@ const LoginPage = () => {
     const [user , setUser] = useState(null)
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
+    const [showErr , setShowErr] = useState(false)
     const navigate = useNavigate();
 
 
@@ -18,7 +19,9 @@ const LoginPage = () => {
         }
         axios.post('http://localhost:3001/auth/login', loginData )
         .then((res)=>{
-            if (res.data.isSuccess) {
+            if (res.data === 'incorrect password') {
+                setShowErr(true)
+            } else {
                 setUser(res.data);
                 navigate("/dashboard")
             }
@@ -35,6 +38,7 @@ return (
                 <input onChange={(e)=>{setEmail(e.target.value)}} className='login-input' type="email" placeholder='Email' />
                 <input onChange={(e)=>{setPassword(e.target.value)}} className='login-input' type="text" placeholder='Password'/>
                 <button className='login-button' type='submit'>Login</button>
+                {showErr && <p className='error-msg'>Incorrect Email or Password</p>}
             </form>
             <p className='login-footer'>Not a Member ? <Link to={"/register"}>register</Link></p>
         </div>
