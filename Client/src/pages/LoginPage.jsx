@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import { useGlobalContext } from '../context/Context';
+
 
 
 const LoginPage = () => {
-    const [user , setUser] = useState(null)
+    const {setUser} = useGlobalContext()
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
     const [showErr , setShowErr] = useState(false)
