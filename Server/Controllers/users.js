@@ -1,10 +1,11 @@
 import User from '../Models/User.js'
 
 export const getAllUser = async (req , res) => {
-    try {
-        // if(req.User) {}
-        const users = await User.find({})
-        res.status(200).json(users)
+    try { 
+        if(req.user){
+            const users = await User.find({})
+            res.status(200).json(users)
+        }
     } catch (error) {
         res.status(500).send({message: error.message})
     }

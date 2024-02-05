@@ -13,13 +13,7 @@ const RegisterPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // const formData = {
-        //     firstName,
-        //     lastName,
-        //     email,
-        //     password,
-        //     picture
-        // }
+
         const formData = new FormData();
 
         formData.append("firstName" , firstName);
