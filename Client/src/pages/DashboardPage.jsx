@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../context/Context'
 import {useNavigate} from 'react-router-dom'
+import UserCard from '../components/UserCard'
 
 
 const DashboardPage = () => {
@@ -48,7 +49,14 @@ const DashboardPage = () => {
 return (
     <section className='dashboard-section'>
         {users ?
-        <div className='dashboard-content'>hellloo</div>
+        <div className='dashboard-content'>
+            <h2 className='dashboard-title'>Dashboard</h2>
+            <div className='dashboard-users'>
+                {users.map((user) => {
+                    return <UserCard key={user._id} {...user}/>
+                })}
+            </div>
+        </div>
         : 
         <div>You'r not authenticated </div>
         
