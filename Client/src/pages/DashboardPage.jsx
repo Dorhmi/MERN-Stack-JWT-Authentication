@@ -1,21 +1,20 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../context/Context'
-import {useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import UserCard from '../components/UserCard'
 
 
 const DashboardPage = () => {
     const {user , setUser } = useGlobalContext()
     const [users , setUsers] = useState(null)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
 
     console.log(user);
     console.log(users);
     
     useEffect(() => {
-        // Save user to local storage
         if (user) {
             localStorage.setItem('user', JSON.stringify(user));
         }
@@ -43,9 +42,6 @@ const DashboardPage = () => {
     }, [user])
 
 
-
-
-
 return (
     <section className='dashboard-section'>
         {users ?
@@ -58,9 +54,12 @@ return (
             </div>
         </div>
         : 
-        <div>You'r not authenticated </div>
-        
+        <div>
+            You'r not authenticated go <br />
+            <Link to={'/login'}>login</Link>
+        </div>
         }
+
     </section>
 )
 }

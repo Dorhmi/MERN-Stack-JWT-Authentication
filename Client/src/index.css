@@ -166,3 +166,40 @@ body {
     letter-spacing: 1px;
     font-size: 14px;
 }
+
+.dashboard-content {
+    width: 60%;
+    margin: 100px auto;
+}
+.dashboard-title {
+    text-align: center;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    color: #333;
+    margin-bottom: 70px;
+}
+.dashboard-users {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.article-user {
+    width: 180px;
+    height: 200px;
+    background-color: #dbcfa9;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.article-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+}

@@ -42,6 +42,7 @@ export const login = async (req ,res) => {
             res.json('incorrect password')
         }
     } catch (error) {
+        console.log(error);
         res.json('incorrect password')
     }
 }
