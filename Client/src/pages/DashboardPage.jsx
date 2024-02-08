@@ -5,14 +5,15 @@ import {Link} from 'react-router-dom'
 import UserCard from '../components/UserCard'
 
 
+
 const DashboardPage = () => {
     const {user , setUser } = useGlobalContext()
     const [users , setUsers] = useState(null)
     // const navigate = useNavigate()
 
 
-    console.log(user);
-    console.log(users);
+    // console.log(user);
+    // console.log(users);
     
     useEffect(() => {
         if (user) {
@@ -49,7 +50,7 @@ return (
             <h2 className='dashboard-title'>Dashboard</h2>
             <div className='dashboard-users'>
                 {users.map((user) => {
-                    return <UserCard key={user._id} {...user}/>
+                    return <UserCard key={user._id} id={user._id} {...user}/>
                 })}
             </div>
         </div>

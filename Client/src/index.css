@@ -166,10 +166,14 @@ body {
     letter-spacing: 1px;
     font-size: 14px;
 }
+.dashboard-section {
+    height: 100vh;
+}
 
 .dashboard-content {
     width: 60%;
-    margin: 100px auto;
+    margin: 0 auto;
+    padding-top: 50px;
 }
 .dashboard-title {
     text-align: center;
@@ -177,17 +181,20 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
     color: #333;
-    margin-bottom: 70px;
+    padding-bottom: 70px;
 }
 .dashboard-users {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 50px;
+    overflow-y: scroll;
+    height: 550px;
 }
 
 .article-user {
+    padding: 10px;
     width: 180px;
-    height: 200px;
+    min-height: 200px;
     background-color: #dbcfa9;
     border-radius: 15px;
     display: flex;
@@ -195,6 +202,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .article-img {
@@ -202,4 +210,32 @@ body {
     height: 80px;
     border-radius: 100%;
     object-fit: cover;
+}
+
+.icons-container {
+    width: 57%;
+    margin: 8px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+}
+.delete-btn {
+    color: rgb(218, 34, 34);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-btn {
+    color: rgb(11, 167, 55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.eye-btn {
+    color: rgb(15, 100, 175);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
