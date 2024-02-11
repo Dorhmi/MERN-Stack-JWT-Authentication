@@ -6,7 +6,7 @@ import { useGlobalContext } from '../context/Context';
 
 
 const LoginPage = () => {
-    const {setUser} = useGlobalContext()
+    // const {setUser} = useGlobalContext()
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
     const [error , setError] = useState(false)
@@ -24,7 +24,9 @@ const LoginPage = () => {
             if (res.data === 'incorrect password') {
                 setError(true)
             } else {
-                setUser(res.data);
+                // setUser(res.data);
+                localStorage.setItem('accessToken' , res.data.accessToken)
+                localStorage.setItem('refreshToken' , res.data.refreshToken)
                 navigate("/dashboard")
             }
         })

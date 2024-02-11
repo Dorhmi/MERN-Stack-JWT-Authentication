@@ -25,7 +25,7 @@ const generateAccessToken  = (user) => {
 const generateRefreshToken = (user) => {
     return jwt.sign({id: user.id , isAdmin: user.isAdmin} , process.env.REFRESH_TOKEN_KEY);
 };
-const refreshTokens = [];
+let refreshTokens = [];
 export const login = async (req ,res) => {
     try {
         const {password , email} = req.body

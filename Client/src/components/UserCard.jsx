@@ -4,7 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 
-const UserCard = ({id , email , firstName , lastName , picture , axiosJWT }) => {
+const UserCard = ({id , email , firstName , lastName , picture  }) => {
 
     const handleDelete = (e) => {
         e.preventDefault()
