@@ -30,7 +30,7 @@ body {
     transition: 0.3s;
 }
 .login-btn:hover {
-    background-color: rgb(27, 102, 27) ;
+    background-color: rgb(27, 102, 27);
 }
 .register-btn {
     width: 120px;
@@ -43,7 +43,7 @@ body {
     transition: 0.3s;
 }
 .register-btn:hover {
-    background-color: rgb(27, 102, 27) ;
+    background-color: rgb(27, 102, 27);
 }
 .register-section {
     height: 100vh;
@@ -90,7 +90,7 @@ body {
     margin-top: 10px;
     background-color: rgb(57, 153, 57);
     border: none;
-    padding: 7px ;
+    padding: 7px;
     cursor: pointer;
     transition: 0.3s;
     color: #fff;
@@ -153,7 +153,7 @@ body {
 }
 .login-input:focus {
     color: rgb(27, 102, 27);
-    border-bottom:2px solid rgb(27, 102, 27);
+    border-bottom: 2px solid rgb(27, 102, 27);
 }
 .login-footer {
     text-align: center;
@@ -238,4 +238,56 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    color: #0000;
+    overflow: hidden;
+    animation: l9 5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+.loader:before {
+    content: "Loading...";
+}
+@keyframes l9 {
+    0% {
+        text-shadow: 0 0 #000, 11ch 0 #8a9b0f, 22ch 0 #c02942, 33ch 0 #00a0b0,
+            44ch 0 #000;
+    }
+    25% {
+        text-shadow: -11ch 0 #000, 0ch 0 #8a9b0f, 11ch 0 #c02942, 22ch 0 #00a0b0,
+            33ch 0 #000;
+    }
+    50% {
+        text-shadow: -22ch 0 #000, -11ch 0 #8a9b0f, 0ch 0 #c02942,
+            11ch 0 #00a0b0, 22ch 0 #000;
+    }
+    75% {
+        text-shadow: -33ch 0 #000, -22ch 0 #8a9b0f, -11ch 0 #c02942,
+            0ch 0 #00a0b0, 11ch 0 #000;
+    }
+    100% {
+        text-shadow: -44ch 0 #000, -33ch 0 #8a9b0f, -22ch 0 #c02942,
+            -11ch 0 #00a0b0, 0ch 0 #000;
+    }
+}
+
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(48, 132, 206);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.logout-btn:hover {
+    background-color: rgb(15, 100, 175);
 }
