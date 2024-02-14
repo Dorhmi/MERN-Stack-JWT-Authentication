@@ -31,7 +31,7 @@ const generateRefreshToken = (user) => {
         process.env.REFRESH_TOKEN_KEY
     );
 };
-let refreshTokens = [];
+// let refreshTokens = [];
 export const login = async (req, res) => {
     try {
         const { password, email } = req.body;
@@ -39,7 +39,7 @@ export const login = async (req, res) => {
         if (user.password === password) {
             const accessToken = generateAccessToken(user);
             const refreshToken = generateRefreshToken(user);
-            refreshTokens.push(refreshToken);
+            // refreshTokens.push(refreshToken);
             res.status(200).json({
                 accessToken,
                 refreshToken,
@@ -58,15 +58,15 @@ export const refresh = async (req, res) => {
     if (!refreshToken) {
         return res.status(401).json("You are not authenticated!");
     }
-    if (!refreshTokens.includes(refreshToken)) {
-        return res.status(403).json("Refresh token is not valid!");
-    }
+    // if (!refreshTokens.includes(refreshToken)) {
+    //     return res.status(403).json("Refresh token is not valid!");
+    // }
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY, (err, user) => {
         err && console.log(err);
-        refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+        // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
         const newAccessToken = generateAccessToken(user);
         const newRefreshToken = generateRefreshToken(user);
-        refreshTokens.push(newRefreshToken);
+        // refreshTokens.push(newRefreshToken);
         res.status(200).json({
             accessToken: newAccessToken,
             refreshToken: newRefreshToken,
@@ -76,7 +76,6 @@ export const refresh = async (req, res) => {
 
 export const logout = async (req, res) => {
     const refreshToken = req.body.token;
-    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+    // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
     res.status(200).json("You logged out successfully.");
 };
-console.log(refreshTokens);

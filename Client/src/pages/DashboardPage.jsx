@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { useGlobalContext } from '../context/Context'
+import { useGlobalContext } from "../context/Context";
 import { Link, useNavigate } from "react-router-dom";
 import UserCard from "../components/UserCard";
 import * as jwt_decode from "jwt-decode";
 // import jwt from 'jsonwebtoken'
 
 const DashboardPage = () => {
-    // const {user , setUser } = useGlobalContext()
+    const { accessTokenn, refreshTokenn, setAccessTokenn, setRefreshTokenn } =
+        useGlobalContext();
     const [users, setUsers] = useState(null);
     const navigate = useNavigate();
     // let accessTokenn = localStorage.getItem("accessToken");
@@ -15,12 +16,12 @@ const DashboardPage = () => {
     // const [isFirstMounted, setIsFirstMounted] = useState(true);
     // const navigate = useNavigate()
 
-    const [accessTokenn, setAccessTokenn] = useState("");
-    const [refreshTokenn, setRefreshTokenn] = useState("");
+    // const [accessTokenn, setAccessTokenn] = useState("");
+    // const [refreshTokenn, setRefreshTokenn] = useState("");
     useEffect(() => {
         setAccessTokenn(localStorage.getItem("accessToken"));
         setRefreshTokenn(localStorage.getItem("refreshToken"));
-    }, []);
+    }, [setAccessTokenn, setRefreshTokenn]);
 
     // console.log(accessTokenn);
     // console.log(refreshTokenn);
@@ -81,6 +82,7 @@ const DashboardPage = () => {
                 });
         }
     }, [accessTokenn]);
+
     const handleLogout = () => {
         axios
             .post("http://localhost:3001/auth/logout", {
@@ -89,6 +91,9 @@ const DashboardPage = () => {
             .then(() => {
                 localStorage.clear();
                 navigate("/login");
+            })
+            .catch((error) => {
+                console.log(error);
             });
     };
 
@@ -154,6 +159,7 @@ const DashboardPage = () => {
                                     key={user._id}
                                     id={user._id}
                                     {...user}
+                                    axiosJWT={axiosJWT}
                                 />
                             );
                         })}

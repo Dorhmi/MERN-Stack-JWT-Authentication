@@ -1,23 +1,25 @@
-import { createContext, useContext , useState } from "react"
+import { createContext, useContext, useState } from "react";
 
+export const AppProvider = createContext();
 
-export const AppProvider = createContext()
-
-export default function Context ({children}) {
-    const [user , setUser] = useState(null)
-
-
+export default function Context({ children }) {
+    const [accessTokenn, setAccessTokenn] = useState("");
+    const [refreshTokenn, setRefreshTokenn] = useState("");
 
     return (
-        <AppProvider.Provider value={{
-            user,
-            setUser,
-        }}> 
-            {children} 
+        <AppProvider.Provider
+            value={{
+                accessTokenn,
+                refreshTokenn,
+                setAccessTokenn,
+                setRefreshTokenn,
+            }}
+        >
+            {children}
         </AppProvider.Provider>
-    )
+    );
 }
 
 export const useGlobalContext = () => {
-    return useContext(AppProvider)
-} 
+    return useContext(AppProvider);
+};
