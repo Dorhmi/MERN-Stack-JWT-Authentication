@@ -14,7 +14,26 @@ export const getSingleUser = async (req, res) => {
     res.status(200).json("getSingleUser");
 };
 export const updateUser = async (req, res) => {
-    res.status(200).json("updateUser");
+    try {
+        const { id } = req.params;
+        const newUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+            picture: req.file.originalname,
+            picturePath: req.file.path,
+            isAdmin: false,
+        });
+        if (req.user.id === id || req.user.isAdmin) {
+            const user = await newUser.findByIdAndUpdate(id, newUser);
+            res.status(200).json("user updated successfully");
+        } else {
+            res.status(403).json("You are not allowed to update this user!");
+        }
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
 };
 export const deleteUser = async (req, res) => {
     try {
