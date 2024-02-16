@@ -16,7 +16,7 @@ export const getSingleUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const newUser = new User({
+        const newUser = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -24,9 +24,9 @@ export const updateUser = async (req, res) => {
             picture: req.file.originalname,
             picturePath: req.file.path,
             isAdmin: false,
-        });
+        };
         if (req.user.id === id || req.user.isAdmin) {
-            const user = await newUser.findByIdAndUpdate(id, newUser);
+            const user = await User.findByIdAndUpdate(id, newUser);
             res.status(200).json("user updated successfully");
         } else {
             res.status(403).json("You are not allowed to update this user!");

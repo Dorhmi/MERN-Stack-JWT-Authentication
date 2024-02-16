@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import * as jwt_decode from "jwt-decode";
 import { useGlobalContext } from "../context/Context";
 
 const EditUserPage = () => {
-    const { accessTokenn } = useGlobalContext();
+    const { refreshToken } = useGlobalContext();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -12,6 +13,27 @@ const EditUserPage = () => {
     const [picture, setPicture] = useState("");
     const { id } = useParams();
     const navigate = useNavigate();
+    const [accessTokenn, setAccessTokenn] = useState("");
+    useEffect(() => {
+        setAccessTokenn(localStorage.getItem("accessToken"));
+    }, []);
+
+    const axiosJWT = axios.create();
+
+    axiosJWT.interceptors.request.use(
+        async (config) => {
+            let currentDate = new Date();
+            const decodedToken = jwt_decode.jwtDecode(accessTokenn);
+            if (decodedToken.exp * 1000 < currentDate.getTime()) {
+                const data = await refreshToken();
+                config.headers["authorization"] = "Bearer " + data.accessToken;
+            }
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
+    );
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,12 +46,12 @@ const EditUserPage = () => {
         formData.append("password", password);
         formData.append("picture", picture);
 
-        axios
+        axiosJWT
             .put(`http://localhost:3001/users/${id}`, formData, {
                 headers: { authorization: "Bearer " + accessTokenn },
             })
             .then(() => {
-                navigate("/dashboard");
+                navigate("/login");
             })
             .catch((error) => {
                 console.log(error);

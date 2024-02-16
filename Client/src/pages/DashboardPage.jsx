@@ -7,47 +7,48 @@ import * as jwt_decode from "jwt-decode";
 // import jwt from 'jsonwebtoken'
 
 const DashboardPage = () => {
-    const { accessTokenn, refreshTokenn, setAccessTokenn, setRefreshTokenn } =
-        useGlobalContext();
+    // const { accessTokenn, refreshTokenn } = useGlobalContext();
     const [users, setUsers] = useState(null);
     const navigate = useNavigate();
+    const { refreshToken } = useGlobalContext();
     // let accessTokenn = localStorage.getItem("accessToken");
     // let refreshTokenn = localStorage.getItem("refreshToken");
     // const [isFirstMounted, setIsFirstMounted] = useState(true);
     // const navigate = useNavigate()
 
-    // const [accessTokenn, setAccessTokenn] = useState("");
-    // const [refreshTokenn, setRefreshTokenn] = useState("");
+    const [accessTokenn, setAccessTokenn] = useState("");
+    const [refreshTokenn, setRefreshTokenn] = useState("");
     useEffect(() => {
         setAccessTokenn(localStorage.getItem("accessToken"));
         setRefreshTokenn(localStorage.getItem("refreshToken"));
-    }, [setAccessTokenn, setRefreshTokenn]);
+    }, []);
 
     // console.log(accessTokenn);
     // console.log(refreshTokenn);
 
     // console.log(jwt_decode);
     // console.log(user);
-    // console.log(users);
+    // console.log(accessTokenn);
+    // console.log(refreshTokenn);
 
-    const refreshToken = async () => {
-        try {
-            const res = await axios.post("http://localhost:3001/auth/refresh", {
-                token: refreshTokenn,
-            });
-            localStorage.clear();
-            localStorage.setItem("accessToken", res.data.accessToken);
-            localStorage.setItem("refreshToken", res.data.refreshToken);
-            // setUser({
-            //     ...user,
-            //     accessToken: res.data.accessToken,
-            //     refreshToken: res.data.refreshToken
-            // });
-            return res.data;
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const refreshToken = async () => {
+    //     try {
+    //         const res = await axios.post("http://localhost:3001/auth/refresh", {
+    //             token: refreshTokenn,
+    //         });
+    //         localStorage.clear();
+    //         localStorage.setItem("accessToken", res.data.accessToken);
+    //         localStorage.setItem("refreshToken", res.data.refreshToken);
+    //         // setUser({
+    //         //     ...user,
+    //         //     accessToken: res.data.accessToken,
+    //         //     refreshToken: res.data.refreshToken
+    //         // });
+    //         return res.data;
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     const axiosJWT = axios.create();
 
