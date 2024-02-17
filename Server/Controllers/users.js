@@ -11,7 +11,15 @@ export const getAllUser = async (req, res) => {
     }
 };
 export const getSingleUser = async (req, res) => {
-    res.status(200).json("getSingleUser");
+    try {
+        const { id } = req.params;
+        if (req.user) {
+            const user = await User.findById(id);
+            res.status(200).json(user);
+        }
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
 };
 export const updateUser = async (req, res) => {
     try {

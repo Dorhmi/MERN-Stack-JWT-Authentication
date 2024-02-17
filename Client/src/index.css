@@ -291,3 +291,10 @@ body {
 .logout-btn:hover {
     background-color: rgb(15, 100, 175);
 }
+
+.single-user-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+}
