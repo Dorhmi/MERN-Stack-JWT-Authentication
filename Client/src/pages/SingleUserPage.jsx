@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const SingleUserPage = () => {
     const { accessTokenn, setAccessTokenn, refreshToken } = useGlobalContext();
     const [user, setUser] = useState({});
+    const [showForm, setShowForm] = useState(false);
     const { id } = useParams();
 
     useEffect(() => {
@@ -47,6 +48,59 @@ const SingleUserPage = () => {
 
     const { firstName, lastName, picture } = user;
 
+    if (showForm) {
+        return (
+            <div className="showForm">
+                <div className="register-content-post">
+                    <button
+                        onClick={() => setShowForm(false)}
+                        className="close-btn"
+                    >
+                        X
+                    </button>
+                    <p className="register-header">Create Post</p>
+                    <form className="register-form">
+                        <div className="form-div">
+                            <p className="form-header">Post Title</p>
+                            <input
+                                onChange={(e) => {
+                                    setFirstName(e.target.value);
+                                }}
+                                className="register-input"
+                                type="text"
+                                placeholder="Enter your title"
+                            />
+                        </div>
+                        <div className="form-div">
+                            <p className="form-header">Post Content</p>
+                            <textarea
+                                rows="6"
+                                cols="50"
+                                onChange={(e) => {
+                                    setFirstName(e.target.value);
+                                }}
+                                className="register-input"
+                                type="text"
+                                placeholder="Enter your content"
+                            />
+                        </div>
+                        <div className="form-div">
+                            <p className="form-header">Post Picture</p>
+                            <input
+                                onChange={(e) => {
+                                    setPicture(e.target.files[0]);
+                                }}
+                                className="register-input"
+                                type="file"
+                                name="picture"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <section className="single-user-section">
             <div className="section-info">
@@ -62,7 +116,13 @@ const SingleUserPage = () => {
             <div className="section-posts">
                 <div className="single-user-title">
                     <p>all post of {lastName}</p>
-                    <button className="add-btn"> Add Post +</button>
+                    <button
+                        onClick={() => setShowForm(true)}
+                        className="add-btn"
+                    >
+                        {" "}
+                        Add Post +
+                    </button>
                 </div>
                 <div className="single-user-posts">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
