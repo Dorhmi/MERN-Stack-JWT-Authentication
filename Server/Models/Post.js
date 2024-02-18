@@ -13,6 +13,9 @@ const PostSchema = new mongoose.Schema(
         postPicture: {
             type: String,
         },
+        userID: {
+            Type: String,
+        },
     },
     { timestamps: true }
 );

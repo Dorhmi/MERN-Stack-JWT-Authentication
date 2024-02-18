@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-app.use("/posts", postRoutes);
+app.use("/post", postRoutes);
 
 const PORT = process.env.PORT;
 const URL = process.env.MONGO_URL;

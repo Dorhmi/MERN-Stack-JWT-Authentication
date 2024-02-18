@@ -6,6 +6,9 @@ import { useParams } from "react-router-dom";
 
 const SingleUserPage = () => {
     const { accessTokenn, setAccessTokenn, refreshToken } = useGlobalContext();
+    const [postTitle, setPostTitle] = useState("");
+    const [postContent, setPostContent] = useState("");
+    const [picturee, setPicturee] = useState("");
     const [user, setUser] = useState({});
     const [showForm, setShowForm] = useState(false);
     const { id } = useParams();
@@ -46,6 +49,28 @@ const SingleUserPage = () => {
         }
     }, [accessTokenn]);
 
+    const handleSubmit = (e) => {
+        e.preventDefult();
+
+        const formData = new FormData();
+
+        formData.append("postTitle", postTitle);
+        formData.append("postContent", postContent);
+        formData.append("picturee", picturee);
+        formData.append("userID", id);
+
+        axiosJWT
+            .post("http://localhost:3001/post/", formData, {
+                headers: { authorization: "Bearer " + accessTokenn },
+            })
+            .then(() => {
+                setShowForm(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     const { firstName, lastName, picture } = user;
 
     if (showForm) {
@@ -64,7 +89,7 @@ const SingleUserPage = () => {
                             <p className="form-header">Post Title</p>
                             <input
                                 onChange={(e) => {
-                                    setFirstName(e.target.value);
+                                    setPostTitle(e.target.value);
                                 }}
                                 className="register-input"
                                 type="text"
@@ -77,7 +102,7 @@ const SingleUserPage = () => {
                                 rows="6"
                                 cols="50"
                                 onChange={(e) => {
-                                    setFirstName(e.target.value);
+                                    setPostContent(e.target.value);
                                 }}
                                 className="register-input"
                                 type="text"
@@ -88,7 +113,7 @@ const SingleUserPage = () => {
                             <p className="form-header">Post Picture</p>
                             <input
                                 onChange={(e) => {
-                                    setPicture(e.target.files[0]);
+                                    setPicturee(e.target.files[0]);
                                 }}
                                 className="register-input"
                                 type="file"
