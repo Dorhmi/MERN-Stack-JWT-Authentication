@@ -49,7 +49,7 @@ const SingleUserPage = () => {
 
     return (
         <section className="single-user-section">
-            <div>
+            <div className="section-info">
                 <img
                     className="single-user-img"
                     src={`http://localhost:3001/assets/${picture}`}
@@ -58,6 +58,26 @@ const SingleUserPage = () => {
                 <h3>
                     {firstName} {lastName}{" "}
                 </h3>
+            </div>
+            <div className="section-posts">
+                <div className="single-user-title">
+                    <p>all post of {lastName}</p>
+                    <button className="add-btn"> Add Post +</button>
+                </div>
+                <div className="single-user-posts">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                    delectus magni qui optio impedit tempora vel fuga ad nihil
+                    aperiam? Dignissimos velit, recusandae officia facilis ab
+                    commodi laborum repellendus laboriosam. Lorem ipsum, dolor
+                    sit amet consectetur adipisicing elit. Laboriosam tempora ab
+                    saepe aliquid non tenetur eligendi suscipit recusandae magni
+                    rem itaque deserunt error quo, commodi eos? Assumenda
+                    nostrum facere aperiam. Lorem ipsum dolor, sit amet
+                    consectetur adipisicing elit. Provident doloremque minima
+                    autem ex ab? Officia sit suscipit aliquam incidunt earum
+                    aspernatur debitis molestias necessitatibus maxime
+                    doloremque doloribus, at est quasi.
+                </div>
             </div>
         </section>
     );
