@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(verifyToken);
 
 router.post("/", upload.single("picture"), createPost);
-router.get("/userPosts", getUserPosts);
+router.post("/userPosts", getUserPosts);
 router.delete("/delete/:id", removePost);
 
 export default router;

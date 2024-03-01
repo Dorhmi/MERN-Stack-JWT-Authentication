@@ -3,6 +3,7 @@ import { useGlobalContext } from "../context/Context";
 import axios from "axios";
 import * as jwt_decode from "jwt-decode";
 import { useParams } from "react-router-dom";
+import UserPosts from "../components/UserPosts";
 
 const SingleUserPage = () => {
     const { accessTokenn, setAccessTokenn, refreshToken } = useGlobalContext();
@@ -10,8 +11,11 @@ const SingleUserPage = () => {
     const [postContent, setPostContent] = useState("");
     const [picturee, setPicturee] = useState("");
     const [user, setUser] = useState({});
+    const [allpost, setAllPost] = useState({});
     const [showForm, setShowForm] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams();
+    console.log(allpost);
 
     useEffect(() => {
         setAccessTokenn(localStorage.getItem("accessToken"));
@@ -34,6 +38,8 @@ const SingleUserPage = () => {
         }
     );
 
+    const ID = { userID: id };
+
     useEffect(() => {
         if (accessTokenn) {
             axiosJWT
@@ -42,6 +48,19 @@ const SingleUserPage = () => {
                 })
                 .then((res) => {
                     setUser(res.data);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+            axiosJWT
+                .post(`http://localhost:3001/post/userPosts`, ID, {
+                    headers: { authorization: "Bearer " + accessTokenn },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    setAllPost(res.data);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -49,16 +68,37 @@ const SingleUserPage = () => {
         }
     }, [accessTokenn]);
 
+    // useEffect(() => {
+    //     if (accessTokenn) {
+    //         const ID = { userID: id };
+    //         console.log(ID);
+    //         axiosJWT
+    //             .get(`http://localhost:3001/post/userPosts`, ID, {
+    //                 headers: { authorization: "Bearer " + accessTokenn },
+    //             })
+    //             .then((res) => {
+    //                 console.log(res.data);
+    //                 setAllPost(res.data);
+    //             })
+    //             .catch((error) => {
+    //                 console.log(error);
+    //             });
+    //     }
+    // }, [accessTokenn]);
+
     const handleSubmit = (e) => {
-        e.preventDefult();
+        e.preventDefault();
 
         const formData = new FormData();
 
         formData.append("postTitle", postTitle);
         formData.append("postContent", postContent);
-        formData.append("picturee", picturee);
-        formData.append("userID", id);
-
+        formData.append("picture", picturee);
+        formData.append("userID", user._id);
+        // for (let pair of formData.entries()) {
+        //     console.log(pair[0] + ", " + pair[1]);
+        // }
+        console.log(user);
         axiosJWT
             .post("http://localhost:3001/post/", formData, {
                 headers: { authorization: "Bearer " + accessTokenn },
@@ -73,6 +113,14 @@ const SingleUserPage = () => {
 
     const { firstName, lastName, picture } = user;
 
+    if (isLoading) {
+        return (
+            <div>
+                <div className="loader"></div>
+            </div>
+        );
+    }
+
     if (showForm) {
         return (
             <div className="showForm">
@@ -84,7 +132,7 @@ const SingleUserPage = () => {
                         X
                     </button>
                     <p className="register-header">Create Post</p>
-                    <form className="register-form">
+                    <form onSubmit={handleSubmit} className="register-form">
                         <div className="form-div">
                             <p className="form-header">Post Title</p>
                             <input
@@ -120,6 +168,9 @@ const SingleUserPage = () => {
                                 name="picture"
                             />
                         </div>
+                        <button className="submit-btn" type="submit">
+                            Submit
+                        </button>
                     </form>
                 </div>
             </div>
@@ -140,7 +191,7 @@ const SingleUserPage = () => {
             </div>
             <div className="section-posts">
                 <div className="single-user-title">
-                    <p>all post of {lastName}</p>
+                    <p>{lastName}'s Posts</p>
                     <button
                         onClick={() => setShowForm(true)}
                         className="add-btn"
@@ -149,20 +200,23 @@ const SingleUserPage = () => {
                         Add Post +
                     </button>
                 </div>
-                <div className="single-user-posts">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                    delectus magni qui optio impedit tempora vel fuga ad nihil
-                    aperiam? Dignissimos velit, recusandae officia facilis ab
-                    commodi laborum repellendus laboriosam. Lorem ipsum, dolor
-                    sit amet consectetur adipisicing elit. Laboriosam tempora ab
-                    saepe aliquid non tenetur eligendi suscipit recusandae magni
-                    rem itaque deserunt error quo, commodi eos? Assumenda
-                    nostrum facere aperiam. Lorem ipsum dolor, sit amet
-                    consectetur adipisicing elit. Provident doloremque minima
-                    autem ex ab? Officia sit suscipit aliquam incidunt earum
-                    aspernatur debitis molestias necessitatibus maxime
-                    doloremque doloribus, at est quasi.
-                </div>
+                {allpost.length === 0 ? (
+                    <div className="single-user-posts">
+                        <p>No posts yet</p>
+                    </div>
+                ) : (
+                    <div className="single-user-posts">
+                        {allpost.map((post) => {
+                            return (
+                                <UserPosts
+                                    key={post._id}
+                                    {...post}
+                                    userPicture={picture}
+                                />
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </section>
     );

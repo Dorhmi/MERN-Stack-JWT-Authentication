@@ -4,17 +4,17 @@ const PostSchema = new mongoose.Schema(
     {
         postTitle: {
             type: String,
-            require: true,
+            required: true,
         },
         postContent: {
             type: String,
-            require: true,
+            required: true,
+        },
+        userID: {
+            type: String,
         },
         postPicture: {
             type: String,
-        },
-        userID: {
-            Type: String,
         },
     },
     { timestamps: true }

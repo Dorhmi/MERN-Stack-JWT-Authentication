@@ -389,3 +389,27 @@ body {
     font-weight: 700;
     cursor: pointer;
 }
+.article-post-user {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 2px solid #b8b7b7;
+}
+.article-post-title {
+    display: flex;
+    align-items: center;
+}
+.article-post-img {
+    width: 100%;
+    border-radius: 15px;
+}
+.article-post-user-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 6px;
+}
